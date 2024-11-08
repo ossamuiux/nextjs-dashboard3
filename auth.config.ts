@@ -3,7 +3,8 @@ import type { NextAuthConfig } from 'next-auth';
 // 인증설정객체
 export const authConfig = {
   pages: {
-    // 로그아웃시 사용자가 리디렉션될 경로, /면 홈페이지로 이동
+    // 로그인 필요한 페이지로 접근시 리디렉션 경로, 로그인페이지가 있는 위치로 지정
+    // signOut 미지정시 로그아웃시 /login으로 이동됨
     signIn: '/login',
   },
   callbacks: {
@@ -22,7 +23,7 @@ export const authConfig = {
         // 로그인상태 아니면 login으로 리디렉션
         return false;
       } else if (isLoggedIn) {
-        // 대시보드경로가 이닐 경우 로그인상태면 대시보드로 리디렉션
+        // 대시보드경로가 아닐 경우 로그인상태면 대시보드로 리디렉션
         return Response.redirect(new URL('/dashboard', nextUrl));
       }
       // 기본값으로 접근허용
